@@ -1,14 +1,15 @@
-import rules from './data.json';
+// local dependencies
+import Rule from "./Rule";
 
-export const RuleList = () => {
-    // const rules = ["rule 1", "rule 2", "rule 3"];
-
+/**
+ * Display list of rules.
+ */
+export const RuleList = ({ rules }) => {
     return (
-        <div>
-            {
-                rules.map(rule =>
-                    <div>{rule.description}</div>
-                )}
-        </div>
-    )
+        <>
+            {rules.map(function (rule) {
+                return <Rule key={rule.id} rule={rule} />;
+            })}
+        </>
+    );
 }

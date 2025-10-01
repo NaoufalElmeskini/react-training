@@ -1,13 +1,11 @@
-import {useState} from 'react'
 import './App.css'
 import {RuleList} from "./RuleList.jsx";
+import data from "./data.json";
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-      <RuleList/>
-  )
+    return (
+        <RuleList rules={data}/>
+    );
 }
 
 export default App
