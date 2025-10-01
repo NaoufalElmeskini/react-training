@@ -1,26 +1,18 @@
 // NPM dependencies
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faChevronDown, faPencil, faThumbsDown, faThumbsUp,} from '@fortawesome/free-solid-svg-icons';
+import {faChevronDown, faPencil,} from '@fortawesome/free-solid-svg-icons';
 import {useState} from "react";
 import {faChevronUp} from "@fortawesome/free-solid-svg-icons/faChevronUp";
+import LikeBtn from "./LikeBtn.jsx";
+import DisikeBtn from "./DisikeBtn.jsx";
 
 /**
  * Display a single rule.
  */
 function Rule({ rule }) {
     const [folded , setFolded] = useState(false);
-    const [likeCount , setLikeCount] = useState(0);
-    const [dislikeCount , setDislikeCount] = useState(0);
     const foldClicker = () => {
         setFolded(!folded)
-    }
-
-    const likeClicker = () => {
-        setLikeCount(likeCount+1);
-    }
-
-    const dislikeClicker = () => {
-        setDislikeCount(dislikeCount+1);
     }
 
     return (
@@ -40,12 +32,9 @@ function Rule({ rule }) {
                         <FontAwesomeIcon icon={faPencil} />
                     </button>
                     <div className="flex">
-                        <button type="button" className="border p-4" title="+1" onClick={likeClicker}>
-                            {likeCount} <FontAwesomeIcon icon={faThumbsUp} />
-                        </button>
-                        <button type="button" className="border p-4" title="+1" onClick={dislikeClicker}>
-                            {dislikeCount} <FontAwesomeIcon icon={faThumbsDown} />
-                        </button>
+                        <LikeBtn/>
+
+                        <DisikeBtn/>
                     </div>
                 </div>
             </footer>
