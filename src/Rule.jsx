@@ -18,6 +18,7 @@ function Rule({ rule }) {
     return (
         <section className="m-16 mt-4 cursor-pointer">
             <header className="bg-blue-400 text-3xl p-4 text-white flex justify-between items-center" onClick={foldClicker}>
+
                 {rule.title} <FontAwesomeIcon icon={folded ? faChevronUp: faChevronDown} className="m-4" />
             </header>
             <p className="p-4 text-2xl" hidden = {folded} >{rule.description}</p>
@@ -32,9 +33,8 @@ function Rule({ rule }) {
                         <FontAwesomeIcon icon={faPencil} />
                     </button>
                     <div className="flex">
-                        <LikeBtn count={0}/>
-
-                        <DisikeBtn count={0}/>
+                        <LikeBtn count={rule.likes}/>
+                        <DisikeBtn count={rule.dislikes}/>
                     </div>
                 </div>
             </footer>
