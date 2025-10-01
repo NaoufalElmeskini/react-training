@@ -3,8 +3,8 @@ import {faThumbsDown} from "@fortawesome/free-solid-svg-icons";
 import {useState} from "react";
 
 
-const DislikeBtn = () => {
-    const [dislikeCount , setDislikeCount] = useState(0);
+const DislikeBtn = (props) => {
+    const [dislikeCount , setDislikeCount] = useState(props.count);
 
 
     const dislikeClicker = () => {

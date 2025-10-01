@@ -32,9 +32,9 @@ function Rule({ rule }) {
                         <FontAwesomeIcon icon={faPencil} />
                     </button>
                     <div className="flex">
-                        <LikeBtn/>
+                        <LikeBtn count={0}/>
 
-                        <DisikeBtn/>
+                        <DisikeBtn count={0}/>
                     </div>
                 </div>
             </footer>

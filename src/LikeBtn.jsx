@@ -3,8 +3,8 @@ import {faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import {useState} from "react";
 
 
-const LikeBtn = () => {
-    const [likeCount , setLikeCount] = useState(0);
+const LikeBtn = (props) => {
+    const [likeCount , setLikeCount] = useState(props.count);
 
 
     const likeClicker = () => {
