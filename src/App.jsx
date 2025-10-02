@@ -1,15 +1,17 @@
 // NPM dependencies
 import {useEffect} from "react";
-
-// Local dependencies
-import RuleList from "./pages/RuleList.jsx";
-import {RoleProvider} from "./services/RoleContext.jsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import Layout from "./Layout.jsx";
-import RuleForm from "./pages/RuleForm.jsx";
-import {addRules, getRules} from "./services/rules.store.js";
 import {useDispatch, useSelector} from "react-redux";
 
+// Local dependencies
+import RuleList from "./pages/RuleList";
+import {RoleProvider} from "./services/RoleContext";
+import {addRules, getRules} from "./services/rules-bonus.store";
+import RuleForm from "./pages/RuleForm";
+import Layout from "./components/Layout.jsx";
+
+const delay = (ms) => (data) =>
+    new Promise((resolve) => setTimeout(() => resolve(data), ms));
 
 /**
  * Display list of rules.
@@ -17,16 +19,14 @@ import {useDispatch, useSelector} from "react-redux";
  * the component props.
  */
 function App() {
-
-    const dispatch = useDispatch()
-    const rules = useSelector(
-        getRules
-    )
+    const rules = useSelector(getRules);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         fetch("./data.json")
             .then((res) => res.json())
-            .then(data => dispatch(addRules(data)));
+            // .then(delay(3000))
+            .then((data) => dispatch(addRules(data)));
     }, []);
 
     return (
@@ -34,13 +34,12 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path="" element={<Layout />}>
-                        <Route path="/new" element={<RuleForm />}/>
-                        <Route path="/edit/:id" element={<RuleForm />}/>
-                        <Route path="/" element={<RuleList rules={rules}/>}/>
+                        <Route index element={<RuleList rules={rules} />} />
+                        <Route path="/new" element={<RuleForm />} />
+                        <Route path="/edit/:id" element={<RuleForm />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
-
         </RoleProvider>
     );
 }

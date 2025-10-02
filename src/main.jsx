@@ -1,17 +1,16 @@
 import {StrictMode} from 'react'
 import {createRoot} from 'react-dom/client'
+import {Provider as ReduxProvider} from "react-redux";
 
 import './index.css'
 
-import App from './App.jsx'
-import {Provider} from "react-redux";
-import {ruleStore} from "./services/rules.store.js";
+import App from './App.jsx';
+import {store} from "./services/rules-bonus.store";
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
-        <Provider store={ruleStore}>
+        <ReduxProvider store={store}>
             <App />
-        </Provider>
-
+        </ReduxProvider>
     </StrictMode>,
 )
