@@ -1,10 +1,11 @@
 // NPM dependencies
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronDown, faPencil,} from '@fortawesome/free-solid-svg-icons';
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {faChevronUp} from "@fortawesome/free-solid-svg-icons/faChevronUp";
 import LikeBtn from "./LikeBtn.jsx";
 import DisikeBtn from "./DisikeBtn.jsx";
+import {RoleContext} from "./RoleContext.jsx";
 
 /**
  * Display a single rule.
@@ -14,12 +15,16 @@ function Rule({ rule }) {
     const foldClicker = () => {
         setFolded(!folded)
     }
+    const role = useContext(RoleContext);
+    console.log('role: ' + role)
+    const showRuleStatus = () => {
+        return role === 'admin' ? '( ' +  rule.status + ' )' : '';
+    }
 
     return (
         <section className="m-16 mt-4 cursor-pointer">
             <header className="bg-blue-400 text-3xl p-4 text-white flex justify-between items-center" onClick={foldClicker}>
-
-                {rule.title} <FontAwesomeIcon icon={folded ? faChevronUp: faChevronDown} className="m-4" />
+                {showRuleStatus()} {rule.title} <FontAwesomeIcon icon={folded ? faChevronUp: faChevronDown} className="m-4" />
             </header>
             <p className="p-4 text-2xl" hidden = {folded} >{rule.description}</p>
             <footer className="flex justify-between items-center p-4 border" hidden = {folded} >
