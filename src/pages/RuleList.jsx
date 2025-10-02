@@ -2,8 +2,8 @@
 import {useContext} from "react";
 
 // local dependencies
-import {RoleContext} from "./RoleContext";
-import Rule from "./Rule";
+import {RoleContext} from "../services/RoleContext.jsx";
+import Rule from "../components/Rule.jsx";
 
 /**
  * Display list of rules.

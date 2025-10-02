@@ -4,13 +4,16 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faChevronDown, faChevronUp, faPencil,} from "@fortawesome/free-solid-svg-icons";
 // import './Rule.css'; // Import the CSS file for styles
 // local dependencies
-import {DislikeBtn, LikeBtn} from "./LikeBtn";
+import {DislikeBtn, LikeBtn} from "./LikeBtn.jsx";
+import {useNavigate} from "react-router-dom";
 
 /**
  * Display a single rule.
  */
 function Rule({ rule, isStatusVisible }) {
     const [folded, setFolded] = useState(false);
+    const navigate = useNavigate();
+
 
     return (
         <section className="m-16 mt-4 cursor-pointer">
@@ -31,8 +34,7 @@ function Rule({ rule, isStatusVisible }) {
             <footer
                 className={`flex justify-between items-center p-4 border ${
                     folded ? "hidden" : ""
-                }`}
-            >
+                }`}>
                 <div>
                     {isStatusVisible && (
                         <span className="p-4 bg-gray-400 rounded text-white text-2xl mx-4">
@@ -53,6 +55,7 @@ function Rule({ rule, isStatusVisible }) {
                         type="button"
                         className="bg-blue-400 p-4 rounded text-2xl"
                         title="Update"
+                        onClick={() => navigate('/edit/' + rule.id)}
                     >
                         <FontAwesomeIcon icon={faPencil} />
                     </button>

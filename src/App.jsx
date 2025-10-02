@@ -1,13 +1,12 @@
 // NPM dependencies
 import {useEffect, useState} from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSpinner} from "@fortawesome/free-solid-svg-icons";
 
 // Local dependencies
-import RuleList from "./RuleList";
-import Header from "./Header";
-import {RoleProvider} from "./RoleContext";
-import {LangProvider} from "./LangContext";
+import RuleList from "./pages/RuleList.jsx";
+import {RoleProvider} from "./services/RoleContext.jsx";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import Layout from "./Layout.jsx";
+import RuleForm from "./pages/RuleForm.jsx";
 
 const delay = (ms) => (data) =>
     new Promise((resolve) => setTimeout(() => resolve(data), ms));
@@ -18,30 +17,27 @@ const delay = (ms) => (data) =>
  * the component props.
  */
 function App() {
-    const [rules, setRules] = useState(null);
+    const [rules, setRules] = useState([]);
 
     useEffect(() => {
         fetch("./data.json")
             .then((res) => res.json())
-            .then(delay(3000))
             .then((data) => setRules(data));
     }, []);
 
     return (
-        <LangProvider>
-            <RoleProvider>
-                <Header />
-                {rules ? (
-                    <RuleList rules={rules} />
-                ) : (
-                    <FontAwesomeIcon
-                        className="block m-auto text-6xl"
-                        icon={faSpinner}
-                        spin
-                    />
-                )}
-            </RoleProvider>
-        </LangProvider>
+        <RoleProvider>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="" element={<Layout />}>
+                        <Route path="/new" element={<RuleForm />}/>
+                        <Route path="/edit/:id" element={<RuleForm />}/>
+                        <Route path="/" element={<RuleList rules={rules}/>}/>
+                    </Route>
+                </Routes>
+            </BrowserRouter>
+
+        </RoleProvider>
     );
 }
 

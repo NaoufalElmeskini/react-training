@@ -1,6 +1,6 @@
 import {useContext} from "react";
-import {RoleContext} from "./RoleContext";
-import {LangContext} from "./LangContext";
+import {RoleContext} from "../services/RoleContext.jsx";
+import {LangContext} from "../services/LangContext.jsx";
 
 const Header = () => {
     const { role, setRole } = useContext(RoleContext);
