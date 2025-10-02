@@ -1,5 +1,5 @@
 // NPM dependencies
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 
 // Local dependencies
 import RuleList from "./pages/RuleList.jsx";
@@ -7,9 +7,9 @@ import {RoleProvider} from "./services/RoleContext.jsx";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Layout from "./Layout.jsx";
 import RuleForm from "./pages/RuleForm.jsx";
+import {addRules, getRules} from "./services/rules.store.js";
+import {useDispatch, useSelector} from "react-redux";
 
-const delay = (ms) => (data) =>
-    new Promise((resolve) => setTimeout(() => resolve(data), ms));
 
 /**
  * Display list of rules.
@@ -17,12 +17,16 @@ const delay = (ms) => (data) =>
  * the component props.
  */
 function App() {
-    const [rules, setRules] = useState([]);
+
+    const dispatch = useDispatch()
+    const rules = useSelector(
+        getRules
+    )
 
     useEffect(() => {
         fetch("./data.json")
             .then((res) => res.json())
-            .then((data) => setRules(data));
+            .then(data => dispatch(addRules(data)));
     }, []);
 
     return (
